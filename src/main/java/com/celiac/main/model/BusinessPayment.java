@@ -23,7 +23,7 @@ public class BusinessPayment implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id_bp;
+	private Long id_bp;
 	
 	@ManyToOne
 	@JoinColumn(name = "vat", nullable = false)

@@ -24,7 +24,7 @@ public class Opening implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id_opening;
+	private Long id_opening;
 
 	@ManyToOne
 	@JoinColumn(name = "vat", nullable = false)

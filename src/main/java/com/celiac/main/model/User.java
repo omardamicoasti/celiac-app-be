@@ -38,9 +38,10 @@ public class User implements Serializable {
 	
 	@Column(nullable = false)
 	private String password;
-		
+	
+//	Role could be 'customer' or 'business_owner', default is 'customer'
 	@Column
-	private String role = "USER";
+	private String role = "customer";
 	
 	public User(String username, String name, String surname, String email, Date date_of_birth, String password,
 			String role) {
@@ -53,13 +54,14 @@ public class User implements Serializable {
 		this.role = role;
 	}
 
+	public User() {
+	}
+
 	@Override
 	public String toString() {
 		return "user [username=" + username + ", name=" + name + ", surname=" + surname + ", email=" + email
 				+ ", date_of_birth=" + date_of_birth + ", password=" + password + ", role=" + role + "]";
 	}
-
-
 
 	public String getUsername() {
 		return username;

@@ -38,8 +38,11 @@ public class Business implements Serializable {
 	@Column(nullable = false)
 	private String telephone;
 	
+	@Column(nullable = false)
+	private char active = 'y';
+	
 	public Business(String vat, String name, String street, String city, String county, String region, String email,
-			String telephone) {
+			String telephone, char active) {
 		this.vat = vat;
 		this.name = name;
 		this.street = street;
@@ -48,6 +51,7 @@ public class Business implements Serializable {
 		this.region = region;
 		this.email = email;
 		this.telephone = telephone;
+		this.active = active;
 	}
 	
 	public Business() {
@@ -122,6 +126,16 @@ public class Business implements Serializable {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
+
+	public char getActive() {
+		return active;
+	}
+
+	public void setActive(char active) {
+		this.active = active;
+	}
+	
+	
 		
 }
 

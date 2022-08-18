@@ -18,7 +18,7 @@ public class Dish implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(nullable = false, unique = true)
-	private String id_dish;
+	private Long id_dish;
 
 	@Column(nullable = false)
 	private String name;

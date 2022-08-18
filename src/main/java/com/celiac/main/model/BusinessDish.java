@@ -19,7 +19,7 @@ public class BusinessDish implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id_bd;
+	private Long id_bd;
 	
 	@Column(nullable = false)
 	private String price;
