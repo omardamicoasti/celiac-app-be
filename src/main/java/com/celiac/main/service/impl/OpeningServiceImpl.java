@@ -17,8 +17,8 @@ public class OpeningServiceImpl implements OpeningService {
 	OpeningRepository o;
 
 	@Override
-	public void saveOpening(Opening opening) {
-		o.save(opening);
+	public Opening saveOpening(Opening opening) {
+		return o.save(opening);
 	}
 
 	@Override

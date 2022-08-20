@@ -17,8 +17,8 @@ public class UserServiceImpl implements UserService {
 	UserRepository u;
 
 	@Override
-	public void saveUser(User user) {
-		u.save(user);
+	public User saveUser(User user) {
+		return u.save(user);
 	}
 
 	@Override

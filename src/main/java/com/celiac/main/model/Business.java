@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -41,8 +43,12 @@ public class Business implements Serializable {
 	@Column(nullable = false)
 	private char active = 'y';
 	
+	@ManyToOne
+	@JoinColumn(name = "username", nullable = false)
+	private User username;
+
 	public Business(String vat, String name, String street, String city, String county, String region, String email,
-			String telephone, char active) {
+			String telephone, char active, User username) {
 		this.vat = vat;
 		this.name = name;
 		this.street = street;
@@ -52,15 +58,10 @@ public class Business implements Serializable {
 		this.email = email;
 		this.telephone = telephone;
 		this.active = active;
-	}
-	
-	public Business() {
+		this.username = username;
 	}
 
-	@Override
-	public String toString() {
-		return "business [vat=" + vat + ", name=" + name + ", street=" + street + ", city=" + city + ", county="
-				+ county + ", region=" + region + ", email=" + email + ", telephone=" + telephone + "]";
+	public Business() {
 	}
 
 	public String getVat() {
@@ -134,6 +135,20 @@ public class Business implements Serializable {
 	public void setActive(char active) {
 		this.active = active;
 	}
+
+	public User getUsername() {
+		return username;
+	}
+
+	public void setUsername(User username) {
+		this.username = username;
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 		

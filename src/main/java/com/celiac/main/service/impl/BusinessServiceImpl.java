@@ -17,8 +17,8 @@ public class BusinessServiceImpl implements BusinessService {
 	BusinessRepository b;
 
 	@Override
-	public void saveBusiness(Business business) {
-		b.save(business);
+	public Business saveBusiness(Business business) {
+		return b.save(business);
 	}
 
 	@Override
@@ -34,6 +34,11 @@ public class BusinessServiceImpl implements BusinessService {
 	@Override
 	public void deleteBusiness(Business business) {
 		b.delete(business);
+	}
+	
+	@Override
+	public List<Business> getBusinessByUsername(String username) {
+		return b.getBusinessByUsername(username);
 	}
 
 	@Override
@@ -65,5 +70,11 @@ public class BusinessServiceImpl implements BusinessService {
 	public char activateByVat(String vat) {
 		return b.activateByVat(vat);
 	}
+
+	@Override
+	public Optional<Business> getBusinessByVat(String vat) {
+		return b.getBusinessByVat(vat);
+	}
+
 
 }

@@ -1,6 +1,7 @@
 package com.celiac.main.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -46,5 +47,15 @@ public interface BusinessRepository extends JpaRepository<Business, String> {
 	
 	@Query(value = "select * from business where active = 'y'", nativeQuery = true)
 	public List<Business> getActiveBusiness();
+	
+	// Get business by username 
+	
+	@Query(value = "select * from business where username = ?1", nativeQuery = true)
+	public List<Business> getBusinessByUsername(String username);
+	
+	// Get business by vat 
+	
+	@Query(value = "select * from business where vat = ?1", nativeQuery = true)
+	public Optional<Business> getBusinessByVat(String vat);
 
 }

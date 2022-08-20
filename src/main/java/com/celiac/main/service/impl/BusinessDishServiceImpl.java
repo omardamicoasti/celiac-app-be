@@ -19,8 +19,8 @@ public class BusinessDishServiceImpl implements BusinessDishService {
 	BusinessDishRepository db;
 
 	@Override
-	public void saveBusinessDish(BusinessDish businessDish) {
-		db.save(businessDish);
+	public BusinessDish saveBusinessDish(BusinessDish businessDish) {
+		return db.save(businessDish);
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class BusinessDishServiceImpl implements BusinessDishService {
 	}
 
 	@Override
-	public List<BusinessDish> getBusinessDishesByVat(String vat) {
+	public Optional<BusinessDish> getBusinessDishesByVat(String vat) {
 		return db.getBusinessDishesByVat(vat);
 	}
 

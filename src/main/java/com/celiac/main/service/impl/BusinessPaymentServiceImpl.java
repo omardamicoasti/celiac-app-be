@@ -17,8 +17,8 @@ public class BusinessPaymentServiceImpl implements BusinessPaymentService {
 	BusinessPaymentRepository bp;
 
 	@Override
-	public void saveBusinessPayment(BusinessPayment businessPayment) {
-		bp.save(businessPayment);
+	public BusinessPayment saveBusinessPayment(BusinessPayment businessPayment) {
+		return bp.save(businessPayment);
 	}
 
 	@Override
@@ -34,6 +34,11 @@ public class BusinessPaymentServiceImpl implements BusinessPaymentService {
 	@Override
 	public void deleteBusinessPayment(BusinessPayment businessPayment) {
 		bp.delete(businessPayment);
+	}
+
+	@Override
+	public Optional<BusinessPayment> getBusinessPaymentByVat(String vat) {
+		return bp.getBusinessPaymentByVat(vat);
 	}
 
 }
