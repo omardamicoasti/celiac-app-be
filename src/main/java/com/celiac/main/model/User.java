@@ -33,8 +33,8 @@ public class User implements Serializable {
 		
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyy/MM/dd")
-	private Date date_of_birth;
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date dateOfBirth;
 	
 	@Column(nullable = false)
 	private String password;
@@ -43,13 +43,13 @@ public class User implements Serializable {
 	@Column
 	private String role = "customer";
 	
-	public User(String username, String name, String surname, String email, Date date_of_birth, String password,
+	public User(String username, String name, String surname, String email, Date dateOfBirth, String password,
 			String role) {
 		this.username = username;
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
-		this.date_of_birth = date_of_birth;
+		this.dateOfBirth = dateOfBirth;
 		this.password = password;
 		this.role = role;
 	}
@@ -60,7 +60,7 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return "user [username=" + username + ", name=" + name + ", surname=" + surname + ", email=" + email
-				+ ", date_of_birth=" + date_of_birth + ", password=" + password + ", role=" + role + "]";
+				+ ", dateOfBirth=" + dateOfBirth + ", password=" + password + ", role=" + role + "]";
 	}
 
 	public String getUsername() {
@@ -95,12 +95,12 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public Date getDate_of_birth() {
-		return date_of_birth;
+	public Date getDateOfBirth() {
+		return dateOfBirth;
 	}
 
-	public void setDate_of_birth(Date date_of_birth) {
-		this.date_of_birth = date_of_birth;
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
 	public String getPassword() {

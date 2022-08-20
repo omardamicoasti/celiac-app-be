@@ -1,7 +1,6 @@
 package com.celiac.main.repository;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -17,17 +16,17 @@ public interface BusinessRepository extends JpaRepository<Business, String> {
 	// Get business by city
 	
 	@Query(value = "select * from business where city = ?1", nativeQuery = true)
-	public List<Business> getBusinessByCity(String city);
+	public List<Business> byCity(String city);
 	
 	// Get business by county
 	
 	@Query(value = "select * from business where county = ?1", nativeQuery = true)
-	public List<Business> getBusinessByCounty(String county);
+	public List<Business> byCounty(String county);
 	
 	// Get business by region
 	
 	@Query(value = "select * from business where region = ?1", nativeQuery = true)
-	public List<Business> getBusinessByRegion(String region);
+	public List<Business> byRegion(String region);
 	
 	// Deactivate business by vat
 	
@@ -51,11 +50,11 @@ public interface BusinessRepository extends JpaRepository<Business, String> {
 	// Get business by username 
 	
 	@Query(value = "select * from business where username = ?1", nativeQuery = true)
-	public List<Business> getBusinessByUsername(String username);
+	public List<Business> byUsername(String username);
 	
 	// Get business by vat 
 	
 	@Query(value = "select * from business where vat = ?1", nativeQuery = true)
-	public Optional<Business> getBusinessByVat(String vat);
+	public List<Business> byVat(String vat);
 
 }

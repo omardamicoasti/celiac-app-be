@@ -1,7 +1,6 @@
 package com.celiac.main.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,33 +26,28 @@ public class BusinessServiceImpl implements BusinessService {
 	}
 
 	@Override
-	public Optional<Business> findByVat(String vat) {
-		return b.findById(vat);
-	}
-
-	@Override
 	public void deleteBusiness(Business business) {
 		b.delete(business);
 	}
 	
 	@Override
-	public List<Business> getBusinessByUsername(String username) {
-		return b.getBusinessByUsername(username);
+	public List<Business> byUsername(String username) {
+		return b.byUsername(username);
 	}
 
 	@Override
-	public List<Business> getBusinessByCity(String city) {
-		return b.getBusinessByCity(city);
+	public List<Business> byCity(String city) {
+		return b.byCity(city);
 	}
 
 	@Override
-	public List<Business> getBusinessByCounty(String county) {
-		return b.getBusinessByCounty(county);
+	public List<Business> byCounty(String county) {
+		return b.byCounty(county);
 	}
 
 	@Override
-	public List<Business> getBusinessByRegion(String region) {
-		return b.getBusinessByRegion(region);
+	public List<Business> byRegion(String region) {
+		return b.byRegion(region);
 	}
 
 	@Override
@@ -62,18 +56,19 @@ public class BusinessServiceImpl implements BusinessService {
 	}
 
 	@Override
-	public char deactivateByVat(String vat) {
-		return b.deactivateByVat(vat);
+	public void deactivateByVat(String vat) {
+
+		b.deactivateByVat(vat);
 	}
 
 	@Override
-	public char activateByVat(String vat) {
-		return b.activateByVat(vat);
+	public void activateByVat(String vat) {
+		b.activateByVat(vat);
 	}
 
 	@Override
-	public Optional<Business> getBusinessByVat(String vat) {
-		return b.getBusinessByVat(vat);
+	public List<Business> byVat(String vat) {
+		return b.byVat(vat);
 	}
 
 

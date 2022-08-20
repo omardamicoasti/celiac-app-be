@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -29,9 +29,9 @@ import com.celiac.main.service.DishService;
 import com.celiac.main.service.OpeningService;
 import com.celiac.main.service.UserService;
 
+
 @Controller
-@Scope("session")
-@RequestMapping("/businessowner")
+@RequestMapping("/business-owner")
 public class BusinessOwnerController {
 	
 	@Autowired
@@ -51,59 +51,54 @@ public class BusinessOwnerController {
 	
 	@Autowired
 	BusinessDishService businessDishService;
-	
-	////////////////////////////////////////////////////////////////////////// LOGIN
-	
-	
-	
-	////////////////////////////////////////////////////////////////////////// USER
-	
+
+
+	/* USER API LIST */
 	@CrossOrigin
-	@PutMapping("/saveuser")
+	@PostMapping("/user")
 	public ResponseEntity<User> saveUser (@RequestBody User user) {
-		User updatedUser = userService.saveUser(user);
-		return new ResponseEntity<>(updatedUser, HttpStatus.CREATED);
+		User newUser = userService.saveUser(user);
+		return new ResponseEntity<>(newUser, HttpStatus.CREATED);
 	}
 	
 	@CrossOrigin
-	@GetMapping("/getalluser")
+	@GetMapping("/user")
 	public ResponseEntity<List<User>> getAllUser() {
 		List<User> users = userService.getAll();
 		return new ResponseEntity<>(users, HttpStatus.OK);
 	}
 
-	////////////////////////////////////////////////////////////////////////// BUSINESS
-	
+	/* BUSINESS API LIST */
 	@CrossOrigin
-	@GetMapping("/getallbusiness")
+	@GetMapping("/business")
 	public ResponseEntity<List<Business>> getAllBusiness() {
 		List<Business> businesses = businessService.getAll();
 		return new ResponseEntity<>(businesses, HttpStatus.OK);
 	}
 	
 	@CrossOrigin
-	@PutMapping("/savebusiness")
+	@PostMapping("/business")
 	public ResponseEntity<Business> saveBusiness(@RequestBody Business business) {
-		Business updatedBusiness = businessService.saveBusiness(business);
-		return new ResponseEntity<>(updatedBusiness, HttpStatus.CREATED);
+		Business newBusiness = businessService.saveBusiness(business);
+		return new ResponseEntity<>(newBusiness, HttpStatus.CREATED);
 	}
 
 	@CrossOrigin
-	@GetMapping("/findbyvat/{vat}")
-	public ResponseEntity<Optional<Business>> getEmployeeByVat(@PathVariable("vat") String vat) {
-		Optional<Business> businessByVat = businessService.getBusinessByVat(vat);
-		return new ResponseEntity<Optional<Business>>(businessByVat, HttpStatus.OK);
+	@GetMapping("/business/{vat}")
+	public ResponseEntity<List<Business>> byVat(@PathVariable("vat") String vat) {
+		List<Business> businessByVat = businessService.byVat(vat);
+		return new ResponseEntity<List<Business>>(businessByVat, HttpStatus.OK);
 	}
 	
 	@CrossOrigin
-	@GetMapping("/findbyusername/{username}")
-	public ResponseEntity<List<Business>> getEmployeeByUsername(@PathVariable("username") String username) {
-		List<Business> businessByUsername = businessService.getBusinessByUsername(username);
+	@GetMapping("/business/{username}")
+	public ResponseEntity<List<Business>> byUsername(@PathVariable("username") String username) {
+		List<Business> businessByUsername = businessService.byUsername(username);
 		return new ResponseEntity<List<Business>>(businessByUsername, HttpStatus.OK);
 	}
 	
 	@CrossOrigin
-	@DeleteMapping("/deleteBusiness")
+	@DeleteMapping("/business/{id}")
 	public ResponseEntity<?> deleteBusiness(@RequestBody Business business) {
 		businessService.deleteBusiness(business);
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -112,24 +107,24 @@ public class BusinessOwnerController {
 	@CrossOrigin
 	@PutMapping("/activateByVat/{vat}")
 	public ResponseEntity<?> activateByVat(@PathVariable("vat") String vat) {
-		char activated = businessService.activateByVat(vat);
-		return new ResponseEntity<>(activated, HttpStatus.CREATED);
+		businessService.activateByVat(vat);
+		return new ResponseEntity<>(true, HttpStatus.CREATED);
 	}
 	
 	@CrossOrigin
 	@PutMapping("/deactivateByVat/{vat}")
 	public ResponseEntity<?> deactivateByVat(@PathVariable("vat") String vat) {
-		char deactivated = businessService.deactivateByVat(vat);
-		return new ResponseEntity<>(deactivated, HttpStatus.CREATED);
+		businessService.deactivateByVat(vat);
+		return new ResponseEntity<>(true, HttpStatus.CREATED);
 	}
 	
 	////////////////////////////////////////////////////////////////////////// OPENING
 	
 	@CrossOrigin
-	@PutMapping("/saveopening")
+	@PostMapping("/saveopening")
 	public ResponseEntity<Opening> saveOpening(@RequestBody Opening opening) {
-		Opening updatedOpening = openingService.saveOpening(opening);
-		return new ResponseEntity<>(updatedOpening, HttpStatus.CREATED);
+		Opening newOpening = openingService.saveOpening(opening);
+		return new ResponseEntity<>(newOpening, HttpStatus.CREATED);
 	}
 	
 	@CrossOrigin
@@ -149,10 +144,10 @@ public class BusinessOwnerController {
 	////////////////////////////////////////////////////////////////////////// DISH
 	
 	@CrossOrigin
-	@PutMapping("/savedish")
+	@PostMapping("/savedish")
 	public ResponseEntity<Dish> saveDish(@RequestBody Dish dish) {
-		Dish updatedDish = dishService.saveDish(dish);
-		return new ResponseEntity<>(updatedDish, HttpStatus.CREATED);
+		Dish newDish = dishService.saveDish(dish);
+		return new ResponseEntity<>(newDish, HttpStatus.CREATED);
 	}
 	
 	@CrossOrigin
@@ -165,10 +160,10 @@ public class BusinessOwnerController {
 	////////////////////////////////////////////////////////////////////////// BUSINESS PAYMENT
 	
 	@CrossOrigin
-	@PutMapping("/savebusinesspayment")
+	@PostMapping("/savebusinesspayment")
 	public ResponseEntity<BusinessPayment> saveBusinessPayment(@RequestBody BusinessPayment businesspayment) {
-		BusinessPayment updatedBusinessPayment = businessPaymentService.saveBusinessPayment(businesspayment);
-		return new ResponseEntity<>(updatedBusinessPayment, HttpStatus.CREATED);
+		BusinessPayment newBusinessPayment = businessPaymentService.saveBusinessPayment(businesspayment);
+		return new ResponseEntity<>(newBusinessPayment, HttpStatus.CREATED);
 	}
 		
 	@CrossOrigin
@@ -188,10 +183,10 @@ public class BusinessOwnerController {
 	////////////////////////////////////////////////////////////////////////// BUSINESS DISH
 	
 	@CrossOrigin
-	@PutMapping("/savebusinessdish")
+	@PostMapping("/savebusinessdish")
 	public ResponseEntity<BusinessDish> saveBusinessDish(@RequestBody BusinessDish businessdish) {
-		BusinessDish updatedBusinessDish = businessDishService.saveBusinessDish(businessdish);
-		return new ResponseEntity<>(updatedBusinessDish, HttpStatus.CREATED);
+		BusinessDish newBusinessDish = businessDishService.saveBusinessDish(businessdish);
+		return new ResponseEntity<>(newBusinessDish, HttpStatus.CREATED);
 	}
 		
 	@CrossOrigin
