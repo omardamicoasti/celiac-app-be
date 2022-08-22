@@ -16,31 +16,31 @@ public interface BusinessRepository extends JpaRepository<Business, String> {
 	// Get business by city
 	
 	@Query(value = "select * from business where city = ?1", nativeQuery = true)
-	public List<Business> getBusinessByCity(String city);
+	public List<Business> byCity(String city);
 	
 	// Get business by county
 	
 	@Query(value = "select * from business where county = ?1", nativeQuery = true)
-	public List<Business> getBusinessByCounty(String county);
+	public List<Business> byCounty(String county);
 	
 	// Get business by region
 	
 	@Query(value = "select * from business where region = ?1", nativeQuery = true)
-	public List<Business> getBusinessByRegion(String region);
+	public List<Business> byRegion(String region);
 	
 	// Deactivate business by vat
 	
 	@Modifying
 	@Transactional
 	@Query(value = "update business set active = 'n' where vat = ?1", nativeQuery = true)
-	public void deactivateByVat(String vat);
+	public char deactivateByVat(String vat);
 	
 	// Activate business by vat
 	
 	@Modifying
 	@Transactional
 	@Query(value = "update business set active = 'y' where vat = ?1", nativeQuery = true)
-	public void activateByVat(String vat);
+	public char activateByVat(String vat);
 	
 	// Get all active businesses
 	
@@ -50,11 +50,11 @@ public interface BusinessRepository extends JpaRepository<Business, String> {
 	// Get business by username 
 	
 	@Query(value = "select * from business where username = ?1", nativeQuery = true)
-	public List<Business> getBusinessByUsername(String username);
+	public List<Business> byUsername(String username);
 	
 	// Get business by vat 
 	
 	@Query(value = "select * from business where vat = ?1", nativeQuery = true)
-	public List<Business> getBusinessByVat(String vat);
+	public List<Business> byVat(String vat);
 
 }

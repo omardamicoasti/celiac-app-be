@@ -13,8 +13,4 @@ public interface OpeningService {
 	List<Opening> getAll();
 	Optional<Opening> findByIdOpening(Long id_opening);
 	void deleteOpening(Opening opening);
-	
-	List<Opening> getOpeningByVat(String vat);
-	List<Opening> getOpeningByDay(String day);
-	List<Opening> getOpeningByMeal(String meal);
 }

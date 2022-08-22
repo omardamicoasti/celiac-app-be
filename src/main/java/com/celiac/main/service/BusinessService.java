@@ -13,11 +13,11 @@ public interface BusinessService {
 	List<Business> getAll();
 	void deleteBusiness(Business business);
 	
-	List<Business> getBusinessByVat(String vat);
-	List<Business> getBusinessByUsername(String username);
-	List<Business> getBusinessByCity(String city);
-	List<Business> getBusinessByCounty(String county);
-	List<Business> getBusinessByRegion(String region);
+	List<Business> byVat(String vat);
+	List<Business> byUsername(String username);
+	List<Business> byCity(String city);
+	List<Business> byCounty(String county);
+	List<Business> byRegion(String region);
 	List<Business> getActiveBusiness();
 	void deactivateByVat(String vat);
 	void activateByVat(String vat);

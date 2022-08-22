@@ -52,8 +52,23 @@ public class BusinessOwnerController {
 	@Autowired
 	BusinessDishService businessDishService;
 
-	/* BUSINESS API LIST */
+
+	/* USER API LIST */
+	@CrossOrigin
+	@PostMapping("/user")
+	public ResponseEntity<User> saveUser (@RequestBody User user) {
+		User newUser = userService.saveUser(user);
+		return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+	}
 	
+	@CrossOrigin
+	@GetMapping("/user")
+	public ResponseEntity<List<User>> getAllUser() {
+		List<User> users = userService.getAll();
+		return new ResponseEntity<>(users, HttpStatus.OK);
+	}
+
+	/* BUSINESS API LIST */
 	@CrossOrigin
 	@GetMapping("/business")
 	public ResponseEntity<List<Business>> getAllBusiness() {
@@ -69,120 +84,120 @@ public class BusinessOwnerController {
 	}
 
 	@CrossOrigin
-	@GetMapping("/business-vat/{vat}")
-	public ResponseEntity<List<Business>> getBusinessByVat(@PathVariable("vat") String vat) {
-		List<Business> businessByVat = businessService.getBusinessByVat(vat);
+	@GetMapping("/business/{vat}")
+	public ResponseEntity<List<Business>> byVat(@PathVariable("vat") String vat) {
+		List<Business> businessByVat = businessService.byVat(vat);
 		return new ResponseEntity<List<Business>>(businessByVat, HttpStatus.OK);
 	}
 	
 	@CrossOrigin
-	@GetMapping("/business-username/{username}")
-	public ResponseEntity<List<Business>> getBusinessByUsername(@PathVariable("username") String username) {
-		List<Business> businessByUsername = businessService.getBusinessByUsername(username);
+	@GetMapping("/business/{username}")
+	public ResponseEntity<List<Business>> byUsername(@PathVariable("username") String username) {
+		List<Business> businessByUsername = businessService.byUsername(username);
 		return new ResponseEntity<List<Business>>(businessByUsername, HttpStatus.OK);
 	}
 	
-//	@CrossOrigin
-//	@DeleteMapping("/business/{id}")
-//	public ResponseEntity<?> deleteBusiness(@RequestBody Business business) {
-//		businessService.deleteBusiness(business);
-//		return new ResponseEntity<>(HttpStatus.OK);
-//	}
+	@CrossOrigin
+	@DeleteMapping("/business/{id}")
+	public ResponseEntity<?> deleteBusiness(@RequestBody Business business) {
+		businessService.deleteBusiness(business);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 
 	@CrossOrigin
-	@PutMapping("/business/activate/{vat}")
+	@PutMapping("/activateByVat/{vat}")
 	public ResponseEntity<?> activateByVat(@PathVariable("vat") String vat) {
 		businessService.activateByVat(vat);
 		return new ResponseEntity<>(true, HttpStatus.CREATED);
 	}
 	
 	@CrossOrigin
-	@PutMapping("/business/deactivate/{vat}")
+	@PutMapping("/deactivateByVat/{vat}")
 	public ResponseEntity<?> deactivateByVat(@PathVariable("vat") String vat) {
 		businessService.deactivateByVat(vat);
 		return new ResponseEntity<>(true, HttpStatus.CREATED);
 	}
 	
-	/* OPENING API LIST */
+	////////////////////////////////////////////////////////////////////////// OPENING
 	
 	@CrossOrigin
-	@PostMapping("/opening")
+	@PostMapping("/saveopening")
 	public ResponseEntity<Opening> saveOpening(@RequestBody Opening opening) {
 		Opening newOpening = openingService.saveOpening(opening);
 		return new ResponseEntity<>(newOpening, HttpStatus.CREATED);
 	}
 	
 	@CrossOrigin
-	@GetMapping("/opening")
+	@GetMapping("/getallopening")
 	public ResponseEntity<List<Opening>> getAllOpening() {
 		List<Opening> openings = openingService.getAll();
 		return new ResponseEntity<List<Opening>>(openings, HttpStatus.OK);
 	}
 	
 	@CrossOrigin
-	@DeleteMapping("/opening/{id}")
+	@DeleteMapping("/deleteopening")
 	public ResponseEntity<?> deleteOpening(@RequestBody Opening opening) {
 		openingService.deleteOpening(opening);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	/* DISH API LIST */
+	////////////////////////////////////////////////////////////////////////// DISH
 	
 	@CrossOrigin
-	@PostMapping("/dish")
+	@PostMapping("/savedish")
 	public ResponseEntity<Dish> saveDish(@RequestBody Dish dish) {
 		Dish newDish = dishService.saveDish(dish);
 		return new ResponseEntity<>(newDish, HttpStatus.CREATED);
 	}
 	
 	@CrossOrigin
-	@GetMapping("/dish")
+	@GetMapping("/getalldish")
 	public ResponseEntity<List<Dish>> getAllDish() {
 		List<Dish> dishes = dishService.getAll();
 		return new ResponseEntity<List<Dish>>(dishes, HttpStatus.OK);
 	}
 		
-	/* BUSINESS PAYMENT API LIST */
+	////////////////////////////////////////////////////////////////////////// BUSINESS PAYMENT
 	
 	@CrossOrigin
-	@PostMapping("/business-payment")
+	@PostMapping("/savebusinesspayment")
 	public ResponseEntity<BusinessPayment> saveBusinessPayment(@RequestBody BusinessPayment businesspayment) {
 		BusinessPayment newBusinessPayment = businessPaymentService.saveBusinessPayment(businesspayment);
 		return new ResponseEntity<>(newBusinessPayment, HttpStatus.CREATED);
 	}
 		
 	@CrossOrigin
-	@DeleteMapping("/business-payment/{id}")
+	@DeleteMapping("/deletbusinesspayment")
 	public ResponseEntity<?> deleteBusinessPayment(@RequestBody BusinessPayment businesspayment) {
 		businessPaymentService.deleteBusinessPayment(businesspayment);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@CrossOrigin
-	@GetMapping("/business/{vat}")
+	@GetMapping("/getbusinesspaymentbyvat/{vat}")
 	public ResponseEntity<Optional<BusinessPayment>> getBusinessPaymentByVat(@PathVariable("vat") String vat) {
 		Optional<BusinessPayment> businessPaymentByVat = businessPaymentService.getBusinessPaymentByVat(vat);
 		return new ResponseEntity<Optional<BusinessPayment>>(businessPaymentByVat, HttpStatus.OK);
 	}
 		
-	/* BUSINESS DISH API LIST */
+	////////////////////////////////////////////////////////////////////////// BUSINESS DISH
 	
 	@CrossOrigin
-	@PostMapping("/business-dish")
+	@PostMapping("/savebusinessdish")
 	public ResponseEntity<BusinessDish> saveBusinessDish(@RequestBody BusinessDish businessdish) {
 		BusinessDish newBusinessDish = businessDishService.saveBusinessDish(businessdish);
 		return new ResponseEntity<>(newBusinessDish, HttpStatus.CREATED);
 	}
 		
 	@CrossOrigin
-	@DeleteMapping("/business-dish/{id}")
+	@DeleteMapping("/deletbusinessdish")
 	public ResponseEntity<?> deleteBusinessDish(@RequestBody BusinessPayment businesspayment) {
 		businessPaymentService.deleteBusinessPayment(businesspayment);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@CrossOrigin
-	@GetMapping("/business-dish/{vat}")
+	@GetMapping("/getbusinessdishbyvat/{vat}")
 	public ResponseEntity<Optional<BusinessDish>> getBusinessDishByVat(@PathVariable("vat") String vat) {
 		Optional<BusinessDish> businessDishByVat = businessDishService.getBusinessDishesByVat(vat);
 		return new ResponseEntity<Optional<BusinessDish>>(businessDishByVat, HttpStatus.OK);

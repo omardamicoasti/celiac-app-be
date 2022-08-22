@@ -27,6 +27,7 @@ public class Dish implements Serializable {
 	private String description;
 
 	public Dish(String name, String description) {
+		super();
 		this.name = name;
 		this.description = description;
 	}
