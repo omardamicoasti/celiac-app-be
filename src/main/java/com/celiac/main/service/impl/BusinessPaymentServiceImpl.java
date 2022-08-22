@@ -40,5 +40,10 @@ public class BusinessPaymentServiceImpl implements BusinessPaymentService {
 	public Optional<BusinessPayment> getBusinessPaymentByVat(String vat) {
 		return bp.getBusinessPaymentByVat(vat);
 	}
+	
+	@Override
+	public List<BusinessPayment> getBusinessPaymentByPayment(String payment) {
+		return bp.getBusinessPaymentByPayment(payment);
+	}
 
 }

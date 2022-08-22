@@ -32,7 +32,7 @@ import com.celiac.main.service.UserService;
 
 @Controller
 @RequestMapping("/business-owner")
-public class BusinessOwnerController {
+public class CustomerController {
 	
 	@Autowired
 	UserService userService;
@@ -62,13 +62,6 @@ public class BusinessOwnerController {
 	}
 	
 	@CrossOrigin
-	@PostMapping("/business")
-	public ResponseEntity<Business> saveBusiness(@RequestBody Business business) {
-		Business newBusiness = businessService.saveBusiness(business);
-		return new ResponseEntity<>(newBusiness, HttpStatus.CREATED);
-	}
-
-	@CrossOrigin
 	@GetMapping("/business-vat/{vat}")
 	public ResponseEntity<List<Business>> getBusinessByVat(@PathVariable("vat") String vat) {
 		List<Business> businessByVat = businessService.getBusinessByVat(vat);
@@ -76,41 +69,27 @@ public class BusinessOwnerController {
 	}
 	
 	@CrossOrigin
-	@GetMapping("/business-username/{username}")
-	public ResponseEntity<List<Business>> getBusinessByUsername(@PathVariable("username") String username) {
-		List<Business> businessByUsername = businessService.getBusinessByUsername(username);
-		return new ResponseEntity<List<Business>>(businessByUsername, HttpStatus.OK);
+	@GetMapping("/business-city/{city}")
+	public ResponseEntity<List<Business>> getBusinessByCity(@PathVariable("vat") String city) {
+		List<Business> businessByCity = businessService.getBusinessByCity(city);
+		return new ResponseEntity<List<Business>>(businessByCity, HttpStatus.OK);
 	}
 	
-//	@CrossOrigin
-//	@DeleteMapping("/business/{id}")
-//	public ResponseEntity<?> deleteBusiness(@RequestBody Business business) {
-//		businessService.deleteBusiness(business);
-//		return new ResponseEntity<>(HttpStatus.OK);
-//	}
+	@CrossOrigin
+	@GetMapping("/business-county/{county}")
+	public ResponseEntity<List<Business>> getBusinessByCounty(@PathVariable("vat") String county) {
+		List<Business> businessByCounty = businessService.getBusinessByCounty(county);
+		return new ResponseEntity<List<Business>>(businessByCounty, HttpStatus.OK);
+	}
+	
+	@CrossOrigin
+	@GetMapping("/business-region/{region}")
+	public ResponseEntity<List<Business>> getBusinessByRegion(@PathVariable("vat") String region) {
+		List<Business> businessByRegion = businessService.getBusinessByRegion(region);
+		return new ResponseEntity<List<Business>>(businessByRegion, HttpStatus.OK);
+	}
 
-	@CrossOrigin
-	@PutMapping("/business/activate/{vat}")
-	public ResponseEntity<?> activateByVat(@PathVariable("vat") String vat) {
-		businessService.activateByVat(vat);
-		return new ResponseEntity<>(true, HttpStatus.CREATED);
-	}
-	
-	@CrossOrigin
-	@PutMapping("/business/deactivate/{vat}")
-	public ResponseEntity<?> deactivateByVat(@PathVariable("vat") String vat) {
-		businessService.deactivateByVat(vat);
-		return new ResponseEntity<>(true, HttpStatus.CREATED);
-	}
-	
 	/* OPENING API LIST */
-	
-	@CrossOrigin
-	@PostMapping("/opening")
-	public ResponseEntity<Opening> saveOpening(@RequestBody Opening opening) {
-		Opening newOpening = openingService.saveOpening(opening);
-		return new ResponseEntity<>(newOpening, HttpStatus.CREATED);
-	}
 	
 	@CrossOrigin
 	@GetMapping("/opening")
@@ -120,20 +99,27 @@ public class BusinessOwnerController {
 	}
 	
 	@CrossOrigin
-	@DeleteMapping("/opening/{id}")
-	public ResponseEntity<?> deleteOpening(@RequestBody Opening opening) {
-		openingService.deleteOpening(opening);
-		return new ResponseEntity<>(HttpStatus.OK);
+	@GetMapping("/business-region/{vat}")
+	public ResponseEntity<List<Opening>> getOpeningByVat(@PathVariable("vat") String vat) {
+		List<Opening> openingByVat = openingService.getOpeningByVat(vat);
+		return new ResponseEntity<List<Opening>>(openingByVat, HttpStatus.OK);
 	}
-	
-	/* DISH API LIST */
 	
 	@CrossOrigin
-	@PostMapping("/dish")
-	public ResponseEntity<Dish> saveDish(@RequestBody Dish dish) {
-		Dish newDish = dishService.saveDish(dish);
-		return new ResponseEntity<>(newDish, HttpStatus.CREATED);
+	@GetMapping("/business-region/{day}")
+	public ResponseEntity<List<Opening>> getOpeningByDay(@PathVariable("day") String day) {
+		List<Opening> openingByDay = openingService.getOpeningByDay(day);
+		return new ResponseEntity<List<Opening>>(openingByDay, HttpStatus.OK);
 	}
+	
+	@CrossOrigin
+	@GetMapping("/business-region/{meal}")
+	public ResponseEntity<List<Opening>> getOpeningByMeal(@PathVariable("meal") String meal) {
+		List<Opening> openingByMeal = openingService.getOpeningByMeal(meal);
+		return new ResponseEntity<List<Opening>>(openingByMeal, HttpStatus.OK);
+	}
+		
+	/* DISH API LIST */
 	
 	@CrossOrigin
 	@GetMapping("/dish")
@@ -141,28 +127,28 @@ public class BusinessOwnerController {
 		List<Dish> dishes = dishService.getAll();
 		return new ResponseEntity<List<Dish>>(dishes, HttpStatus.OK);
 	}
+	
+	@CrossOrigin
+	@GetMapping("/dish/{id}")
+	public ResponseEntity<Optional<Dish>> findByIdDish(@PathVariable("id") Long id) {
+		Optional<Dish> dishById = dishService.findByIdDish(id);
+		return new ResponseEntity<Optional<Dish>>(dishById, HttpStatus.OK);
+	}
 		
 	/* BUSINESS PAYMENT API LIST */
-	
-	@CrossOrigin
-	@PostMapping("/business-payment")
-	public ResponseEntity<BusinessPayment> saveBusinessPayment(@RequestBody BusinessPayment businesspayment) {
-		BusinessPayment newBusinessPayment = businessPaymentService.saveBusinessPayment(businesspayment);
-		return new ResponseEntity<>(newBusinessPayment, HttpStatus.CREATED);
-	}
 		
 	@CrossOrigin
-	@DeleteMapping("/business-payment/{id}")
-	public ResponseEntity<?> deleteBusinessPayment(@RequestBody BusinessPayment businesspayment) {
-		businessPaymentService.deleteBusinessPayment(businesspayment);
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
-	
-	@CrossOrigin
-	@GetMapping("/business/{vat}")
+	@GetMapping("/business-payment-vat/{vat}")
 	public ResponseEntity<Optional<BusinessPayment>> getBusinessPaymentByVat(@PathVariable("vat") String vat) {
 		Optional<BusinessPayment> businessPaymentByVat = businessPaymentService.getBusinessPaymentByVat(vat);
 		return new ResponseEntity<Optional<BusinessPayment>>(businessPaymentByVat, HttpStatus.OK);
+	}
+	
+	@CrossOrigin
+	@GetMapping("/business-payment-payment/{payment}")
+	public ResponseEntity<List<BusinessPayment>> getBusinessPaymentByPayment(@PathVariable("vat") String payment) {
+		List<BusinessPayment> businessPaymentByPayment = businessPaymentService.getBusinessPaymentByPayment(payment);
+		return new ResponseEntity<List<BusinessPayment>>(businessPaymentByPayment, HttpStatus.OK);
 	}
 		
 	/* BUSINESS DISH API LIST */

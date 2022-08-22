@@ -15,4 +15,5 @@ public interface BusinessPaymentService {
 	void deleteBusinessPayment(BusinessPayment businessPayment);
 	
 	Optional<BusinessPayment> getBusinessPaymentByVat(String vat);
+	List<BusinessPayment> getBusinessPaymentByPayment(String payment);
 }

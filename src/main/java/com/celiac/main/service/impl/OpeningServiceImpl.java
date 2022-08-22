@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.celiac.main.model.Business;
 import com.celiac.main.model.Opening;
 import com.celiac.main.repository.OpeningRepository;
 import com.celiac.main.service.OpeningService;
@@ -34,6 +35,21 @@ public class OpeningServiceImpl implements OpeningService {
 	@Override
 	public void deleteOpening(Opening opening) {
 		o.delete(opening);
+	}
+	
+	@Override
+	public List<Opening> getOpeningByVat(String vat) {
+		return o.getOpeningByVat(vat);
+	}
+
+	@Override
+	public List<Opening> getOpeningByDay(String day) {
+		return o.getOpeningByDay(day);
+	}
+
+	@Override
+	public List<Opening> getOpeningByMeal(String meal) {
+		return o.getOpeningByMeal(meal);
 	}
 
 }
