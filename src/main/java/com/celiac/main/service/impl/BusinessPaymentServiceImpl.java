@@ -41,4 +41,9 @@ public class BusinessPaymentServiceImpl implements BusinessPaymentService {
 		return bp.getBusinessPaymentByVat(vat);
 	}
 
+	@Override
+	public List<BusinessPayment> getBusinessPaymentByPayment(String payment) {
+		return bp.getBusinessPaymentByPayment(payment);
+	}
+
 }

@@ -86,14 +86,14 @@ public class BusinessOwnerController {
 	@CrossOrigin
 	@GetMapping("/business/{vat}")
 	public ResponseEntity<List<Business>> byVat(@PathVariable("vat") String vat) {
-		List<Business> businessByVat = businessService.byVat(vat);
+		List<Business> businessByVat = businessService.getBusinessByVat(vat);
 		return new ResponseEntity<List<Business>>(businessByVat, HttpStatus.OK);
 	}
 	
 	@CrossOrigin
 	@GetMapping("/business/{username}")
 	public ResponseEntity<List<Business>> byUsername(@PathVariable("username") String username) {
-		List<Business> businessByUsername = businessService.byUsername(username);
+		List<Business> businessByUsername = businessService.getBusinessByUsername(username);
 		return new ResponseEntity<List<Business>>(businessByUsername, HttpStatus.OK);
 	}
 	

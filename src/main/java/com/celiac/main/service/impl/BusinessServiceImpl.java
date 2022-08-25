@@ -31,23 +31,23 @@ public class BusinessServiceImpl implements BusinessService {
 	}
 	
 	@Override
-	public List<Business> byUsername(String username) {
+	public List<Business> getBusinessByUsername(String username) {
 		return b.byUsername(username);
 	}
 
 	@Override
-	public List<Business> byCity(String city) {
-		return b.byCity(city);
+	public List<Business> getBusinessByCity(String city) {
+		return b.getBusinessByCity(city);
 	}
 
 	@Override
-	public List<Business> byCounty(String county) {
-		return b.byCounty(county);
+	public List<Business> getBusinessByCounty(String county) {
+		return b.getBusinessByCounty(county);
 	}
 
 	@Override
-	public List<Business> byRegion(String region) {
-		return b.byRegion(region);
+	public List<Business> getBusinessByRegion(String region) {
+		return b.getBusinessByRegion(region);
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class BusinessServiceImpl implements BusinessService {
 	}
 
 	@Override
-	public List<Business> byVat(String vat) {
+	public List<Business> getBusinessByVat(String vat) {
 		return b.byVat(vat);
 	}
 

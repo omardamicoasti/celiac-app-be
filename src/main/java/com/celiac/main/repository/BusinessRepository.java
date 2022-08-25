@@ -16,17 +16,17 @@ public interface BusinessRepository extends JpaRepository<Business, String> {
 	// Get business by city
 	
 	@Query(value = "select * from business where city = ?1", nativeQuery = true)
-	public List<Business> byCity(String city);
+	public List<Business> getBusinessByCity(String city);
 	
 	// Get business by county
 	
 	@Query(value = "select * from business where county = ?1", nativeQuery = true)
-	public List<Business> byCounty(String county);
+	public List<Business> getBusinessByCounty(String county);
 	
 	// Get business by region
 	
 	@Query(value = "select * from business where region = ?1", nativeQuery = true)
-	public List<Business> byRegion(String region);
+	public List<Business> getBusinessByRegion(String region);
 	
 	// Deactivate business by vat
 	

@@ -36,4 +36,19 @@ public class OpeningServiceImpl implements OpeningService {
 		o.delete(opening);
 	}
 
+	@Override
+	public List<Opening> getOpeningByVat(String vat) {
+		return o.getOpeningByVat(vat);
+	}
+
+	@Override
+	public List<Opening> getOpeningByDay(String day) {
+		return o.getOpeningByDay(day);
+	}
+
+	@Override
+	public List<Opening> getOpeningByMeal(String meal) {
+		return o.getOpeningByDay(meal);
+	}
+
 }
